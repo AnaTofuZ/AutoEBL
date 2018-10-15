@@ -2,9 +2,14 @@ package main
 
 import (
 	"github.com/AnaTofuZ/AutoEBL"
+	"log"
+	"os"
 )
 
 func main() {
-	auebl := AutoEBL.New()
-	auebl.Run()
+	autoebl := AutoEBL.New()
+	if err := autoebl.Run(); err != nil {
+		log.Fatal(err)
+	}
+	os.Exit(0)
 }
