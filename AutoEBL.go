@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/chromedp/chromedp"
 	"github.com/pkg/errors"
-	"log"
 	"os"
 	"time"
 )
@@ -63,7 +62,7 @@ func (auebl *AutoEBL) doEBL() error {
 	ctxt, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	chrome, err := chromedp.New(ctxt, chromedp.WithLog(log.Printf))
+	chrome, err := chromedp.New(ctxt)
 
 	if err != nil {
 		return err
@@ -96,6 +95,8 @@ func (auebl *AutoEBL) sendkeys() chromedp.Tasks {
 		chromedp.WaitVisible(`//*[@id="lblTh1"]`),
 		chromedp.Click(`#itemCheckA000`),
 		chromedp.Click(`//*[@id="lblExtend"]`),
+		chromedp.WaitVisible(`#main > div.module.mt5.mb10 > div > div > p.fc-red`),
+        chromedp.Click(`//*[@id="lblExtend"]`),
 		chromedp.Sleep(30 * time.Second),
 	}
 }
